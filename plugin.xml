@@ -15,7 +15,6 @@
         <source-file src="src/android/WXPay.java" target-dir="src/com/mobishift/cordova/plugins/wxpay/WXPay"/>
     </platform>
     <platform name="ios">
-        <preference name="APP_ID" />
         <config-file parent="/*" target="config.xml">
             <feature name="WXPay">
                 <param name="ios-package" value="WXPay"/>
@@ -28,7 +27,7 @@
                     <string>weixin</string>
                     <key>CFBundleURLSchemes</key>
                     <array>
-                        <string>$APP_ID</string>
+                        <string>{{WX_APP_ID}}</string>
                     </array>
                 </dict>
             </array>
