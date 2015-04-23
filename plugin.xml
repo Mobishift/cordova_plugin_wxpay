@@ -27,7 +27,7 @@
                     <string>weixin</string>
                     <key>CFBundleURLSchemes</key>
                     <array>
-                        <string>{{WX_APP_ID}}</string>
+                        <string>WX_APP_ID</string>
                     </array>
                 </dict>
             </array>
