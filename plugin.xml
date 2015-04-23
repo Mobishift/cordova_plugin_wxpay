@@ -15,20 +15,20 @@
         <source-file src="src/android/WXPay.java" target-dir="src/com/mobishift/cordova/plugins/wxpay/WXPay"/>
     </platform>
     <platform name="ios">
+        <preference name="APP_ID" />
         <config-file parent="/*" target="config.xml">
             <feature name="WXPay">
                 <param name="ios-package" value="WXPay"/>
             </feature>
         </config-file>
-        <config-file target="*-Info.plist" parent="/plist/">
-            <key>CFBundleURLTypes</key>
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
             <array>
                 <dict>
                     <key>CFBundleURLName</key>
                     <string>weixin</string>
                     <key>CFBundleURLSchemes</key>
                     <array>
-                        <string>wxd930ea5d5a258f4f</string>
+                        <string>$APP_ID</string>
                     </array>
                 </dict>
             </array>
@@ -37,6 +37,7 @@
 
         <header-file src="src/ios/WXApi.h"/>
         <header-file src="src/ios/WXApiObject.h" />
-        <framework src="src/ios/libWeChatSDK.a" />
+
+        <framework src="src/ios/libWeChatSDK.a" custom="true"/>
     </platform>
 </plugin>
