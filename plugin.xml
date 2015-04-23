@@ -19,6 +19,23 @@
                 <param name="ios-package" value="WXPay"/>
             </feature>
         </config-file>
+        <config-file target="*-Info.plist" parent="/plist/">
+            <key>CFBundleURLTypes</key>
+            <array>
+                <dict>
+                    <key>CFBundleURLName</key>
+                    <string>weixin</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>wxd930ea5d5a258f4f</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
         <source-file src="src/ios/WXPay.m"/>
+
+        <header-file src="src/ios/WXApi.h"/>
+        <header-file src="src/ios/WXApiObject.h" />
+        <framework src="src/ios/libWeChatSDK.a" />
     </platform>
 </plugin>
