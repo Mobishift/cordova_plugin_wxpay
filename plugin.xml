@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.mobishift.cordova.plugins.wxpay" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>WXPay</name>
+    <js-module name="WXPay" src="www/WXPay.js">
+        <clobbers target="cordova.plugins.WXPay"/>
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="WXPay">
+                <param name="android-package" value="com.mobishift.cordova.plugins.wxpay.WXPay"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"/>
+        <source-file src="src/android/WXPay.java" target-dir="src/com/mobishift/cordova/plugins/wxpay/WXPay"/>
+    </platform>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="WXPay">
+                <param name="ios-package" value="WXPay"/>
+            </feature>
+        </config-file>
+        <source-file src="src/ios/WXPay.m"/>
+    </platform>
+</plugin>
