@@ -1,5 +1,15 @@
-var exec = require('cordova/exec');
-
-exports.coolMethod = function(arg0, success, error) {
-    exec(success, error, "WXPay", "coolMethod", [arg0]);
-};
+window.WXPay = {
+	execute: function(action, array, successCallback, errorCallback) {
+		cordova.exec(    
+			successCallback, 
+			errorCallback,
+			"WXPay",
+			action,
+			array
+		)
+	},
+	pay: function(array, successCallback, errorCallback) {
+		this.execute("pay", array, successCallback, errorCallback);
+	}
+}
+module.exports = WXPay;
