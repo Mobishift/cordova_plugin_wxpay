@@ -11,6 +11,7 @@
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"/>
+        <source-file src="src/android/libs/libammsdk.jar" target-dir="libs/" />
         <source-file src="src/android/WXPay.java" target-dir="src/com/mobishift/cordova/plugins/wxpay/WXPay"/>
     </platform>
     <platform name="ios">
