@@ -7,8 +7,8 @@
 
 @interface WXPay : CDVPlugin <WXApiDelegate>{
   // Member variables go here.
-    enum WXScene _scene;
     NSString* _callbackId;
+    NSString* _AppId;
 }
 
 - (void)pay:(CDVInvokedUrlCommand*)command;
@@ -18,13 +18,6 @@
 
 @implementation WXPay
 
--(id) init{
-    if(self = [super init]){
-        _scene = WXSceneSession;
-    }
-    return self;
-}
-
 - (void)pay:(CDVInvokedUrlCommand*)command
 {
 //    CDVPluginResult* pluginResult = nil;
@@ -32,17 +25,25 @@
     _callbackId = command.callbackId;
     
     NSString* AppID = [command.arguments objectAtIndex:0];
+    _AppId = AppID;
     [WXApi registerApp:AppID];
+    
+    if(![WXApi isWXAppInstalled]){
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"未安装微信"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:_callbackId];
+        return;
+    }
     
     PayReq* request = [[PayReq alloc] init];
     request.partnerId = [command.arguments objectAtIndex:1];
     request.prepayId = [command.arguments objectAtIndex:2];
     request.package = [command.arguments objectAtIndex:3];
     request.nonceStr = [command.arguments objectAtIndex:4];
-    request.timeStamp = (unsigned long)[command.arguments objectAtIndex:5];
+    request.timeStamp = [(NSString*)[command.arguments objectAtIndex:5] longLongValue];
     request.sign = [command.arguments objectAtIndex:6];
-    [WXApi sendReq:request];
-    
+    if(![WXApi sendReq:request]){
+        [self returnError:@"调用微信支付失败"];
+    }
 //    
 //    if (echo != nil && [echo length] > 0) {
 //        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
@@ -76,6 +77,13 @@
                 [self returnError: [NSString stringWithFormat:@"支付失败，code=%d", resp.errCode]];
                 break;
         }
+    }
+}
+
+-(void)handleOpenURL:(NSNotification *)notification{
+    NSURL* url = [notification object];
+    if([url isKindOfClass:[NSURL class]] && [url.scheme isEqualToString:_AppId]){
+        [WXApi handleOpenURL:url delegate:self];
     }
 }
 
