@@ -1,14 +1,14 @@
 window.WXPay = {
-	execute: function(action, array, successCallback, errorCallback) {
-		cordova.exec(    
-			successCallback, 
-			errorCallback,
-			"WXPay",
-			action,
-			array
-		)
-	},
-	pay: function(host, out_trade_no, successCallback, errorCallback) {
+    execute: function(action, array, successCallback, errorCallback) {
+        cordova.exec(    
+            successCallback, 
+            errorCallback,
+            "WXPay",
+            action,
+            array
+        )
+    },
+    pay: function(host, out_trade_no, successCallback, errorCallback) {
         var randomString = function (length) {
             var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
             
@@ -22,13 +22,14 @@ window.WXPay = {
             }
             return str;
         }
+        var pay = this;
         var request = new XMLHttpRequest();
         request.onreadystatechange = function(){
             if (request.readyState == 4) {
                 if (request.status == 200) {
                     var data = JSON.parse(request.responseText);
                     if(data.sign){
-                        this.execute("pay", [data.appId, data.partnerId, data.prepayId, data.packageValue, data.nonceStr, data.timeStamp, data.sign], successCallback, errorCallback);
+                        pay.execute("pay", [data.appId, data.partnerId, data.prepayId, data.packageValue, data.nonceStr, data.timeStamp, data.sign], successCallback, errorCallback);
                     }else{
                         errorCallback(null);
                     }
@@ -39,6 +40,6 @@ window.WXPay = {
         }
         request.open("GET", host + "/wxpay/prepay_params?trade_type=APP&out_trade_no=" + out_trade_no, true);
         request.send();
-	}
+    }
 }
 module.exports = WXPay;
