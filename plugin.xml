@@ -38,5 +38,7 @@
         <header-file src="src/ios/WXApiObject.h" />
 
         <framework src="src/ios/libWeChatSDK.a" custom="true"/>
+        <framework src="libsqlite3.0.dylib" />
+        <framework src="libz.dylib" />
     </platform>
 </plugin>

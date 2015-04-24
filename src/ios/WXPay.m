@@ -28,19 +28,19 @@
 - (void)pay:(CDVInvokedUrlCommand*)command
 {
 //    CDVPluginResult* pluginResult = nil;
-    NSArray* params = [command.arguments objectAtIndex:0];
+    
     _callbackId = command.callbackId;
     
-    NSString* AppID = [params objectAtIndex:0];
+    NSString* AppID = [command.arguments objectAtIndex:0];
     [WXApi registerApp:AppID];
     
     PayReq* request = [[PayReq alloc] init];
-    request.partnerId = [params objectAtIndex:1];
-    request.prepayId = [params objectAtIndex:2];
-    request.package = [params objectAtIndex:3];
-    request.nonceStr = [params objectAtIndex:4];
-    request.timeStamp = (unsigned long)[params objectAtIndex:5];
-    request.sign = [params objectAtIndex:6];
+    request.partnerId = [command.arguments objectAtIndex:1];
+    request.prepayId = [command.arguments objectAtIndex:2];
+    request.package = [command.arguments objectAtIndex:3];
+    request.nonceStr = [command.arguments objectAtIndex:4];
+    request.timeStamp = (unsigned long)[command.arguments objectAtIndex:5];
+    request.sign = [command.arguments objectAtIndex:6];
     [WXApi sendReq:request];
     
 //    
