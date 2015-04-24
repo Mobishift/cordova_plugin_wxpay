@@ -77,6 +77,8 @@
                 [self returnError: [NSString stringWithFormat:@"支付失败，code=%d", resp.errCode]];
                 break;
         }
+    }else{
+        [self returnError: @"发生了奇怪的事"];
     }
 }
 

@@ -15,12 +15,19 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
  * This class echoes a string called from JavaScript.
  */
 public class WXPay extends CordovaPlugin {
-    
+    public static CallbackContext callbackContext = null;
+    public static String appID = null;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("pay")) {
+
             String appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign;
             IWXAPI msgApi = WXAPIFactory.createWXAPI(cordova.getActivity(), null);
+            if(!msgApi.isWXAppInstalled()){
+                callbackContext.error("您未安装微信");
+                return false;
+            }
             try{
                 appId = args.getString(0);
                 partnerId = args.getString(1);
@@ -30,22 +37,24 @@ public class WXPay extends CordovaPlugin {
                 timeStamp = args.getString(5);
                 sign = args.getString(6);
             } catch (JSONException e) {
-				callbackContext.error(e.getMessage());
-				return false;
+                callbackContext.error(e.getMessage());
+                return false;
             }
+            WXPay.callbackContext = callbackContext;
+            WXPay.appID = appId;
             PayReq req;
             req = new PayReq();
             
-    		req.appId = appId;
-    		req.partnerId = partnerId;
-    		req.prepayId = prepayId;
-    		req.packageValue = packageValue;
-    		req.nonceStr = nonceStr;
-    		req.timeStamp = timeStamp;
-    		req.sign = sign;
+            req.appId = appId;
+            req.partnerId = partnerId;
+            req.prepayId = prepayId;
+            req.packageValue = packageValue;
+            req.nonceStr = nonceStr;
+            req.timeStamp = timeStamp;
+            req.sign = sign;
             
-    		msgApi.registerApp(appId);
-    		msgApi.sendReq(req);
+            msgApi.registerApp(appId);
+            msgApi.sendReq(req);
             
             return true;
         }
