@@ -10,7 +10,7 @@
                 <param name="android-package" value="com.mobishift.cordova.plugins.wxpay.WXPay"/>
             </feature>
         </config-file>
-        <config-file parent="/*" target="AndroidManifest.xml">
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <activity android:exported="true" android:launchMode="singleTop" android:name=".wxapi.WXPayEntryActivity" />
         </config-file>
         <source-file src="src/android/libs/libammsdk.jar" target-dir="libs/" />
