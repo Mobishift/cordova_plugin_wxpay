@@ -35,11 +35,11 @@
             </array>
         </config-file>
         <source-file src="src/ios/WXPay.m"/>
+        <source-file src="src/ios/libWeChatSDK.a" framework="true"/>
 
         <header-file src="src/ios/WXApi.h"/>
         <header-file src="src/ios/WXApiObject.h" />
 
-        <framework src="src/ios/libWeChatSDK.a" custom="true"/>
         <framework src="libsqlite3.0.dylib" />
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
