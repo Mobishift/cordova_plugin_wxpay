@@ -42,5 +42,6 @@
         <framework src="src/ios/libWeChatSDK.a" custom="true"/>
         <framework src="libsqlite3.0.dylib" />
         <framework src="libz.dylib" />
+        <framework src="libc++.dylib" />
     </platform>
 </plugin>
