@@ -1,4 +1,4 @@
-package net.ztmobile.letingche.wxapi;
+package __PACKAGE_NAME__;
 
 import android.app.Activity;
 import android.content.Intent;
