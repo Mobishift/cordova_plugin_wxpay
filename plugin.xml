@@ -39,7 +39,8 @@
                 <string>weixin</string>
                 <string>wechat</string>
             </array>
-            <key>NSAppTransportSecurity</key>
+        </config-file>
+        <config-file target="*/*-Info.plist" parent="NSAppTransportSecurity">
             <dict>
                 <key>NSAllowsArbitraryLoads</key>
                 <true/>
