@@ -34,6 +34,17 @@
                 </dict>
             </array>
         </config-file>
+        <config-file target="*/*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>weixin</string>
+                <string>wechat</string>
+            </array>
+            <key>NSAppTransportSecurity</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
         <source-file src="src/ios/WXPay.m"/>
         <source-file src="src/ios/libWeChatSDK.a" framework="true"/>
 
